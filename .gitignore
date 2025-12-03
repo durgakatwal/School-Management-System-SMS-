@@ -1,0 +1,38 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+.tmp/
+
+# Logs
+logs/
+*.log
+logs/*.log
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Cache
+.cache/
+.next/
+out/
+
+# Optional for React Native or Expo (if any)
+.expo/
+.expo-shared/

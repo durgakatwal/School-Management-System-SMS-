@@ -1,0 +1,942 @@
+@baseUrl=http://localhost:5000
+
+#this is the token of admin 
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGY5NmM1YjExZWExZDg5NzA3MDY5OSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc1NDI0MDgxNCwiZXhwIjoxNzU0ODQ1NjE0fQ.L1stucfZoHg6ciDUtWiF4M0cVJkeCdf0wi8R2N7Fwo8
+###register the admin
+POST {{baseUrl}}/admin/register
+Content-Type: application/json
+
+{
+ "firstName": "Durga",
+  "lastName": "Katwal",
+  "phone": "9816756849",
+  "email": "dkatwal254@gmail.com",
+  "password": "durga@123",
+  "role": "Admin",
+  "address": {
+    "street": "Ward No. 03",
+    "city": "Gaighat",
+    "state": "Province 1",
+    "zip": "56613"
+  },
+  "schoolName": "Aims College",
+  "profilePicture": "https://media.licdn.com/dms/image/v2/D4E03AQGKzQPBvaU3xg/profile-displayphoto-crop_800_800/B4EZgO8PxQHoAM-/0/1752597331973?e=1756944000&v=beta&t=9zKzQeWbW1GqfUxsbhw_ru_Ap0mHiO_ROfmZbwrRH2Q"
+}
+
+###login the admin
+POST {{baseUrl}}/admin/login
+Content-Type: application/json
+
+{
+  "email":"dkatwal254@gmail.com",
+  "password":"durga@123"
+}
+
+
+
+### Get Admin by ID  here admin id is the school id 
+GET {{baseUrl}}/admin/688f96c5b11ea1d897070699
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### UPDATE ADMIN
+PATCH {{baseUrl}}/admin/688f96c5b11ea1d897070699
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "Durga",
+  "lastName": "Katwal",
+  "phone": "9876543210"
+}
+
+### DELETE ADMIN
+DELETE {{baseUrl}}/admin/688f96c5b11ea1d897070699
+Authorization: Bearer {{token}}
+
+
+###create sclass
+POST {{baseUrl}}/sclass
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "sclassName": "Grade 9",
+  "school": "688f96c5b11ea1d897070699"
+}
+
+### Get all classes by school (admin ID)
+GET {{baseUrl}}/sclass/school/688f96c5b11ea1d897070699
+Content-Type: application/json
+Authorization: {{token}}
+
+### Get details of a specific class
+GET {{baseUrl}}/sclass/64f69f91c9e4f41fc8ee6911
+Content-Type: application/json
+
+
+### Get students of a specific class
+GET {{baseUrl}}/sclass/students/688bb1c388f6808b2892cc71
+Authorization: Bearer {{token}}
+
+
+
+
+### Update a class
+PATCH {{baseUrl}}/sclass/update/688f9c5968e90096dd98e819
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "sclassName": "Class 10",
+  "capacity": 45
+}
+
+
+### Delete a specific class by ID (along with students, subjects, and teachers of that class)
+DELETE {{baseUrl}}/sclass/688f9c5968e90096dd98e819
+
+
+
+
+### Delete all classes by School ID (and also delete all students, subjects, and teachers under that school)
+DELETE {{baseUrl}}/sclass/school/688f96c5b11ea1d897070699
+
+
+#this is the token of teacher
+# @token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGZhM2QwOWI0MjBkODg0Yjc1MmRlNCIsInJvbGUiOiJUZWFjaGVyIiwiaWF0IjoxNzU0Mjk2NTEwLCJleHAiOjE3NTQ5MDEzMTB9.4DORZPND5UbT73rhbQbzCYNQabJAXTSd3uwitDZwVv8
+
+###Register a new teacher
+POST {{baseUrl}}/teachers/register
+Content-Type: application/json
+
+{
+  "name":"TaraKanta Chaudhary",
+  "email":"tarakanta454@gmail.com",
+  "password":"tarakanta@123",
+  "school":"688f96c5b11ea1d897070699",
+  "teachSclass":"689063a36fc7fb55c2ccf25b"
+}
+
+
+### Teacher Login
+POST {{baseUrl}}/teachers/login
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "email":"rameshkarki32@gmail.com",
+  "password":"ramesh@123"
+}
+
+### Get All Teachers
+GET {{baseUrl}}/teachers
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGZhM2QwOWI0MjBkODg0Yjc1MmRlNCIsInJvbGUiOiJUZWFjaGVyIiwiaWF0IjoxNzU0Mjk3OTc4LCJleHAiOjE3NTQ5MDI3Nzh9.EhpeoYbqwwyK1cdrkvFuULDFiSAtU4LwoncdcUBF_3E
+
+
+###find teacher by id
+GET {{baseUrl}}/teachers/688fa3d09b420d884b752de4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGZhM2QwOWI0MjBkODg0Yjc1MmRlNCIsInJvbGUiOiJUZWFjaGVyIiwiaWF0IjoxNzU0Mjk3OTc4LCJleHAiOjE3NTQ5MDI3Nzh9.EhpeoYbqwwyK1cdrkvFuULDFiSAtU4LwoncdcUBF_3E
+
+
+### Update teacher subject
+PATCH {{baseUrl}}/teachers
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGZhM2QwOWI0MjBkODg0Yjc1MmRlNCIsInJvbGUiOiJUZWFjaGVyIiwiaWF0IjoxNzU0Mjk3OTc4LCJleHAiOjE3NTQ5MDI3Nzh9.EhpeoYbqwwyK1cdrkvFuULDFiSAtU4LwoncdcUBF_3E
+
+{
+  "teacherId": "688fa3d09b420d884b752de4",
+  "teachSubject": "688bb4d1f64fed474ad39135"
+}
+
+###delete teacher by school
+DELETE {{baseUrl}}/teachers/school/688fa3d09b420d884b752de4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGZhM2QwOWI0MjBkODg0Yjc1MmRlNCIsInJvbGUiOiJUZWFjaGVyIiwiaWF0IjoxNzU0Mjk3OTc4LCJleHAiOjE3NTQ5MDI3Nzh9.EhpeoYbqwwyK1cdrkvFuULDFiSAtU4LwoncdcUBF_3E
+
+###delete teacher by class
+DELETE {{baseUrl}}/teachers/class/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGZhM2QwOWI0MjBkODg0Yjc1MmRlNCIsInJvbGUiOiJUZWFjaGVyIiwiaWF0IjoxNzU0Mjk3OTc4LCJleHAiOjE3NTQ5MDI3Nzh9.EhpeoYbqwwyK1cdrkvFuULDFiSAtU4LwoncdcUBF_3E
+
+
+### Mark or update teacher attendance
+POST  {{baseUrl}}/teachers/6890d7779e07b32508a56757
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGZhM2QwOWI0MjBkODg0Yjc1MmRlNCIsInJvbGUiOiJUZWFjaGVyIiwiaWF0IjoxNzU0Mjk3OTc4LCJleHAiOjE3NTQ5MDI3Nzh9.EhpeoYbqwwyK1cdrkvFuULDFiSAtU4LwoncdcUBF_3E
+
+{
+  "date": "2025-08-04",     
+  "status": "Present"       
+}
+
+
+
+
+### Register a new student with exam results and attendance
+POST {{baseUrl}}/students/StudentReg
+Content-Type: application/json
+
+{
+  "name": "sam bahadur",
+  "dob": "2008-08-22",
+  "rollNum": 14,
+  "password": "sam45@12345",
+  "sclassName": "688bb1c388f6808b2892cc71",
+  "school": "688b3119c489a03c4c5577e4",
+  "examResult": [
+    {
+      "subName": "688bb4d1f64fed474ad39135",
+      "marksObtained": 78
+    },
+    {
+      "subName": "688bb4d1f64fed474ad39136",
+      "marksObtained": 69
+    }
+  ],
+  "attendance": [
+    {
+      "date": "2025-07-31",
+      "status": "Present",
+      "subName": "688bb4d1f64fed474ad39135"
+    }
+  ]
+}
+
+
+
+###login student
+POST {{baseUrl}}/students/StudentLogin
+Content-Type: application/json
+
+{
+  "rollNum": "14",
+  "name": "sam bahadur",
+  "password": "sam45@12345"
+}
+
+
+###find all student
+GET {{baseUrl}}/students/Students
+Content-Type: application/json
+
+
+###get the student by the school id
+GET {{baseUrl}}/students/Student/688fa6ab73e78ad9a1309f68
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+###update the student by id
+PATCH {{baseUrl}}/students/StudentUpdate/688fa6ab73e78ad9a1309f68
+Content-Type: application/json
+
+{
+  "dob": "2007-08-11"
+}    
+
+### Delete all students by school ID
+DELETE {{baseUrl}}/students/Students/688b3119c489a03c4c5577e4
+Authorization: Bearer {{token}}
+
+### Delete all students by class ID
+DELETE {{baseUrl}}/students/StudentsClass/688f9c5968e90096dd98e819
+Authorization: Bearer {{token}}
+
+
+### Delete single student by ID
+DELETE {{baseUrl}}/students/Student/688fa6ab73e78ad9a1309f68
+Authorization: Bearer {{token}}
+
+
+### Update exam result by the student id
+PATCH {{baseUrl}}/students/UpdateExamResult/688fa6ab73e78ad9a1309f68
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "subName": "688bb4d1f64fed474ad39135",
+  "marksObtained": 88
+}
+
+
+### Mark or update student attendance by student id
+PATCH {{baseUrl}}/students/StudentAttendance/688fa6ab73e78ad9a1309f68
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "subName": "688bb4d1f64fed474ad39135",
+  "status": "Absent",
+  "date": "2025-08-03"
+}
+
+
+### Remove attendance of all students for a subject by subject id
+PUT {{baseUrl}}/students/RemoveAllStudentsSubAtten/688bb4d1f64fed474ad39135
+Authorization: Bearer {{token}}
+
+
+### Clear all students' attendance by school ID
+PATCH {{baseUrl}}/students/RemoveAllStudentsAtten/688b3119c489a03c4c5577e4
+Authorization: Bearer {{token}}
+
+
+
+
+
+### Remove student's attendance for one subject by student id
+PATCH {{baseUrl}}/students/RemoveStudentSubAtten/688bb4d1f64fed474ad39135
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "subId": "64e6c9fbb79e8c3f8d45b123"
+}
+
+
+### Clear all attendance for one student by his id
+PATCH {{baseUrl}}/students/RemoveStudentAtten/688bb4d1f64fed474ad39135
+Authorization: Bearer {{token}}
+
+
+
+
+
+### Create Subjects for a Class
+POST {{baseUrl}}/subject
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+{
+  "subjects": [
+    {
+      "subName": "Math",
+      "subCode": "MATH101",
+      "sessions": "Mon-Wed-Fri",
+      "teacher": "688fa3d09b420d884b752de4"
+    },
+    {
+      "subName": "Science",
+      "subCode": "SCI201",
+      "sessions": "Tue-Thu",
+      "teacher": "6890d7779e07b32508a56757"
+    }
+  ],
+  "sclassName": "688f9c5968e90096dd98e819",
+  "school": "688f96c5b11ea1d897070699"
+}
+
+### Create a new complaint
+POST {{baseUrl}}/complain/complain-Register
+Content-Type: application/json
+
+{
+  "user": "6890d7779e07b32508a56757",       
+  "date": "2025-08-05T00:00:00.000Z",      
+  "complaint": "The class 9 classroom is too noisy during lectures.",
+  "school": "688f96c5b11ea1d897070699"      
+}
+
+
+### Create a new notice
+POST {{baseUrl}}/notice/CreateNotices
+Content-Type: application/json
+
+{
+  "title": "Preboard Exam Notice",
+  "details": "Dear Students your preboard exam will be held from 2082-04-25 onwards so Everyone's due must be cleared to be appeared in exam.prepare well and good luck",
+  "date": "2082-05-24",
+  "school": "688f96c5b11ea1d897070699" 
+}
+
+###get all notices
+GET {{baseUrl}}/notice/notices
+
+###delete noticeImage
+DELETE {{baseUrl}}/notice/deleteNoticeImage/688c26e1191bda457b081de6/notice%2Fd27849fe48ed5e14355826e6f3cebf82_ltai0b
+Authorization: Bearer {{token}}
+
+### Create a new School Event
+POST {{baseUrl}}/schoolEvents/create
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Science Fair 2025",
+  "description": "Annual inter-school science fair",
+  "eventType": "Academic",
+  "startDate": "2025-09-10T09:00:00.000Z",
+  "endDate": "2025-09-10T15:00:00.000Z",
+  "startTime": "09:00",
+  "endTime": "15:00",
+  "location": "Auditorium Hall",
+  "adminID": "688f96c5b11ea1d897070699", 
+  "targetAudience": "Students",
+  "organizer": {
+    "name": "Mr. Sharma",
+    "contact": "9812345678",
+    "email": "sharma@gmail.com"
+  },
+  "priority": "High",
+  "createdBy": "Principal"
+}
+
+###get all school events
+GET {{baseUrl}}/schoolEvents/list/688f96c5b11ea1d897070699
+
+###update school event
+PATCH {{baseUrl}}/schoolEvents/688f96c5b11ea1d897070699
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Science Fair 2025",
+  "description": "Annual inter-school science fair",
+  "eventType": "Academic",
+  "startDate": "2025-09-10T09:00:00.000Z",
+  "endDate": "2025-09-10T15:00:00.000Z",
+  "startTime": "09:00",
+  "endTime": "15:00",
+  "location": "Auditorium Hall",
+  "adminID": "688f96c5b11ea1d897070699", 
+  "targetAudience": "Students",
+  "targetClasses": [
+    {
+      "_id": "688f9c5968e90096dd98e819",
+      "className": "Class 10"
+    }
+  ],
+  "organizer": {
+    "name": "Mr. Sharma",
+    "contact": "9812345678",
+    "email": "sharma@gmail.com"
+  },
+  "priority": "High",
+  "createdBy": "Principal"
+}
+
+###delete school event
+DELETE {{baseUrl}}/schoolEvents/delete/688f96c5b11ea1d897070699
+Authorization: Bearer {{token}}
+
+###delete all school events
+DELETE {{baseUrl}}/schoolEvents/deleteAll/688f96c5b11ea1d897070699
+Authorization: Bearer {{token}}
+
+###upload school event image
+POST {{baseUrl}}/schoolEvents/uploadImage/688f96c5b11ea1d897070699
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "image": "688f96c5b11ea1d897070699"
+}
+
+### ===== FEE MANAGEMENT SYSTEM =====
+
+### Create Fee Structure
+POST {{baseUrl}}/fees/structure/create
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "school": "688f96c5b11ea1d897070699",
+  "sclassName": "688b3119c489a03c4c5577e4",
+  "academicYear": "2024-2025",
+  "feeCategories": [
+    {
+      "categoryName": "Tuition Fee",
+      "amount": 15000,
+      "isOptional": false,
+      "description": "Monthly tuition fee"
+    },
+    {
+      "categoryName": "Library Fee",
+      "amount": 500,
+      "isOptional": false,
+      "description": "Library access and books"
+    },
+    {
+      "categoryName": "Laboratory Fee",
+      "amount": 1000,
+      "isOptional": false,
+      "description": "Science lab equipment and materials"
+    },
+    {
+      "categoryName": "Sports Fee",
+      "amount": 300,
+      "isOptional": true,
+      "description": "Sports activities and equipment"
+    }
+  ],
+  "paymentSchedule": "Monthly",
+  "dueDate": "2025-09-15",
+  "lateFeeAmount": 200,
+  "lateFeeAfterDays": 15
+}
+
+### Get All Fee Structures
+GET {{baseUrl}}/fees/structure/all?school=688f96c5b11ea1d897070699&sclassName=688b3119c489a03c4c5577e4&academicYear=2024-2025
+
+### Get Fee Structure by ID
+GET {{baseUrl}}/fees/structure/6890e070eb3b97170ac72887
+
+### Update Fee Structure
+PUT {{baseUrl}}/fees/structure/6890e070eb3b97170ac72887
+Content-Type: application/json
+
+{
+  "lateFeeAmount": 250,
+  "lateFeeAfterDays": 10
+}
+
+
+### Delete Fee Structure
+DELETE {{baseUrl}}/fees/structure/6890e070eb3b97170ac72887
+
+### Assign Fee to Student
+POST {{baseUrl}}/fees/assign
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "studentId": "688fa6ab73e78ad9a1309f68",
+  "feeStructureId": "68930871d800cdfba78beedf",
+  "discountAmount": 500,
+  "discountReason": "Merit scholarship"
+}
+###get the student fee details for student fee id
+GET {{baseUrl}}/fees/student/688fa6ab73e78ad9a1309f68
+
+### Record Payment
+POST {{baseUrl}}/fees/payment/record
+Content-Type: application/json
+
+{
+  "studentFeeId": "68930a0ee5ce9982f1ad4c4a",
+  "amount": 5000,
+  "paymentMethod": "Cash",
+  "transactionId": "TXN123456789",
+  "receivedBy": "John Doe - Cashier",
+  "remarks": "Partial payment for tuition fee",
+  "paymentDate": "2024-08-15"
+}
+
+### Get Student Fee Details
+GET {{baseUrl}}/fees/student/688fa6ab73e78ad9a1309f68
+
+### Get All Student Fees (Admin)
+GET {{baseUrl}}/fees/all?school=688f96c5b11ea1d897070699&paymentStatus=Pending&page=1&limit=10
+
+### Get Payment History by student fee id
+GET {{baseUrl}}/fees/payment-history/68930a0ee5ce9982f1ad4c4a
+
+### Add Fee Exemption
+POST {{baseUrl}}/fees/exemption/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "studentFeeId": "68930a0ee5ce9982f1ad4c4a",
+  "categoryName": "Sports Fee",
+  "exemptedAmount": 300,
+  "reason": "Student not participating in sports activities",
+  "approvedBy": "Principal - Durga Katwal"
+}
+
+### Get Fee Statistics
+GET {{baseUrl}}/fees/statistics?school=688f96c5b11ea1d897070699&academicYear=2024-2025
+
+### Apply Late Fee (Admin Action)
+POST {{baseUrl}}/fees/apply-late-fee
+Content-Type: application/json
+
+{}
+
+### ===== LIBRARY MANAGEMENT SYSTEM =====
+
+### Add New Book
+POST {{baseUrl}}/library/book/add
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "Introduction to Computer Science",
+  "author": "John Smith",
+  "isbn": "978-0-123456-78-9",
+  "category": "Technology",
+  "publisher": "Tech Publications",
+  "publicationYear": 2023,
+  "language": "English",
+  "pages": 450,
+  "description": "A comprehensive guide to computer science fundamentals covering programming, algorithms, and data structures.",
+  "totalCopies": 5,
+  "availableCopies": 5,
+  "location": {
+    "shelf": "A-12",
+    "section": "Computer Science"
+  },
+  "condition": "Excellent",
+  "price": 2500,
+  "school": "688f96c5b11ea1d897070699",
+  "addedBy": "Librarian - Sarah Johnson",
+  "tags": ["programming", "algorithms", "beginner"]
+}
+
+### Get All Books
+GET {{baseUrl}}/library/books?school=688f96c5b11ea1d897070699&page=1&limit=10
+
+### Search Books
+GET {{baseUrl}}/library/books?search=computer&category=Technology&available=true
+
+### Get Book by ID
+GET {{baseUrl}}/library/book/68923831d45d5ed619ccee5a
+
+### Update Book
+PUT {{baseUrl}}/library/book/68923831d45d5ed619ccee5a
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "availableCopies": 4,
+  "condition": "Good",
+  "price": 2200
+}
+
+### Delete Book
+DELETE {{baseUrl}}/library/book/68923831d45d5ed619ccee5a
+Authorization: Bearer {{token}}
+
+### Issue Book to Student
+POST {{baseUrl}}/library/issue
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "bookId": "68923831d45d5ed619ccee5a",
+  "studentId": "688fa6ab73e78ad9a1309f68",
+  "dueDate": "2025-09-15",
+  "issuedBy": "Librarian - Sarah Johnson",
+  "condition": "Good",
+  "notes": "Book issued for semester project"
+}
+
+### Return Book
+POST {{baseUrl}}/library/return
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "issueId": "68923831d45d5ed619ccee5a",
+  "returnedTo": "Librarian - Simple khan",
+  "condition": "Good",
+  "notes": "Book returned in good condition",
+  "fineAmount": 0
+}
+
+### Renew Book
+POST {{baseUrl}}/library/renew
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "issueId": "68923831d45d5ed619ccee5a",
+  "newDueDate": "2025-10-15",
+  "renewedBy": "Librarian - Sarah Johnson"
+}
+
+### Get Student's Issued Books
+GET {{baseUrl}}/library/student/688fa6ab73e78ad9a1309f68/issues?status=Issued
+
+### Get All Book Issues (Admin)
+GET {{baseUrl}}/library/issues?school=688f96c5b11ea1d897070699&status=Issued&page=1&limit=10
+
+### Get Overdue Books
+GET {{baseUrl}}/library/issues?school=688f96c5b11ea1d897070699&overdue=true
+
+
+#from here testing and all remaining
+### Reserve Book
+POST {{baseUrl}}/library/reserve
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "bookId": "68923831d45d5ed619ccee5a",
+  "studentId": "688fa6ab73e78ad9a1309f68",
+  "notes": "Need this book for research project"
+}
+
+### Cancel Reservation
+PUT {{baseUrl}}/library/reservation/68923831d45d5ed619ccee5a/cancel
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "cancelledBy": "Librarian - Sarah Johnson",
+  "cancelReason": "Student no longer needs the book"
+}
+
+### Get Student Reservations
+GET {{baseUrl}}/library/student/688fa6ab73e78ad9a1309f68/reservations?status=Active
+
+### Pay Fine
+POST {{baseUrl}}/library/fine/pay
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "issueId": "68923831d45d5ed619ccee5a",
+  "amount": 50,
+  "paidTo": "Librarian - Sarah Johnson"
+}
+
+### Get Library Statistics
+GET {{baseUrl}}/library/statistics?school=688f96c5b11ea1d897070699
+
+# ========== PARENT PORTAL API ENDPOINTS ==========
+
+### Parent Registration
+# NOTE: Make sure the student ID belongs to the same school as the parent's school ID
+
+
+### Register a Parent
+POST {{baseUrl}}/parents/register
+Content-Type: application/json
+Authorization: Bearer {{token}}   
+
+{
+  "firstName": "Ram Bahadur",
+  "lastName": "karki",
+  "email": "ramkarki@email.com",
+  "password": "Ram@123",
+  "phone": "9801234567",
+  "alternatePhone": "9811234567",
+  "address": {
+    "street": "Ganesh Marg",
+    "city": "Kathmandu",
+    "state": "Bagmati",
+    "zip": "44600"
+  },
+  "occupation": "Engineer",
+  "relationship": "Mother",
+  "children": [
+    {
+      "student": "688fa6ab73e78ad9a1309f68", 
+      "relationship": "Father",
+      "isPrimary": true
+    }
+  ],
+  "school": "688b3119c489a03c4c5577e4",  
+  "profilePicture": "",
+  "emergencyContact": {
+    "name": "Sita Karki",
+    "phone": "9823456789",
+    "relationship": "Spouse"
+  },
+  "preferences": {
+    "notifications": {
+      "email": true,
+      "sms": true,
+      "push": true
+    },
+    "language": "English"
+  }
+}
+
+### Parent Login
+POST {{baseUrl}}/parents/login
+Content-Type: application/json
+
+{
+  "email": "ramkarki@email.com",
+  "password": "Ram@123"
+}
+
+### Get Parent Profile
+GET {{baseUrl}}/parents/profile/6892f52dab6fcae42c3fc795
+Authorization: Bearer {{token}}
+
+### Update Parent Profile
+PUT {{baseUrl}}/parents/profile/6892f52dab6fcae42c3fc795
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "phone": "9816756849",
+  "address": {
+    "street": "Ward No. 03",
+    "city": "Gaighat",
+    "state": "Province 1",
+    "zipCode": "56613",
+    "country": "Nepal"
+  },
+  "occupation": "Engineer",
+  "communicationPreferences": {
+    "email": true,
+    "sms": true,
+    "pushNotifications": true,
+    "preferredLanguage": "English"
+  }
+}
+
+### Parent Login
+POST {{baseUrl}}/parents/login
+Content-Type: application/json
+
+{
+  "email": "ramkarki@email.com",
+  "password": "Ram@123"
+}
+
+### Get Parent Profile
+GET {{baseUrl}}/parents/profile/6892f52dab6fcae42c3fc795
+Authorization: Bearer {{token}}
+
+### Update Parent Profile
+PUT {{baseUrl}}/parents/profile/6892f52dab6fcae42c3fc795
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "phone": "9816756849",
+  "address": {
+    "street": "Ward No. 03",
+    "city": "Gaighat",
+    "state": "Province 1",
+    "zipCode": "56613",
+    "country": "Nepal"
+  },
+  "occupation": "Engineer",
+  "communicationPreferences": {
+    "email": true,
+    "sms": false,
+    "pushNotifications": true,
+    "preferredLanguage": "English"
+  }
+}
+
+### Get Parent Dashboard
+GET {{baseUrl}}/parents/dashboard/6892f52dab6fcae42c3fc795
+Authorization: Bearer {{token}}
+
+# ========== STUDENT TRACKING ==========
+
+### Get Child's Academic Performance
+GET {{baseUrl}}/parents/6892f52dab6fcae42c3fc795/child/688fa6ab73e78ad9a1309f68/academics
+Authorization: Bearer {{token}}
+
+### Get Child's Attendance
+GET {{baseUrl}}/parents/6892f52dab6fcae42c3fc795/child/688fa6ab73e78ad9a1309f68/attendance
+Authorization: Bearer {{token}}
+
+### Get Child's Attendance by Month
+GET {{baseUrl}}/parents/6892f52dab6fcae42c3fc795/child/688fa6ab73e78ad9a1309f68/attendance?month=11&year=2024
+Authorization: Bearer {{token}}
+
+### Get Child's Fee Details
+GET {{baseUrl}}/parents/6892f52dab6fcae42c3fc795/child/688fa6ab73e78ad9a1309f68/fees
+Authorization: Bearer {{token}}
+
+### Get Child's Fee Details by Academic Year
+GET {{baseUrl}}/parents/6892f52dab6fcae42c3fc795/child/688fa6ab73e78ad9a1309f68/fees?academicYear=2024-25
+Authorization: Bearer {{token}}
+
+### Get Child's Library Records
+GET {{baseUrl}}/parents/6892f52dab6fcae42c3fc795/child/688fa6ab73e78ad9a1309f68/library
+Authorization: Bearer {{token}}
+
+### Get Child's Current Library Issues
+GET {{baseUrl}}/parents/6892f52dab6fcae42c3fc795/child/688fa6ab73e78ad9a1309f68/library?status=Issued
+Authorization: Bearer {{token}}
+
+### Get Child's Overdue Library Books
+GET {{baseUrl}}/parents/68923831d45d5ed619ccee5a/child/688fa6ab73e78ad9a1309f68/library?status=Overdue
+Authorization: Bearer {{token}}
+
+# ========== COMMUNICATION ==========
+
+### Send Message to Teacher
+POST {{baseUrl}}/parents/68923831d45d5ed619ccee5a/messages/send
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "recipient": "688fa6ab73e78ad9a1309f69",
+  "recipientModel": "teacher",
+  "student": "688fa6ab73e78ad9a1309f68",
+  "subject": "Question about homework",
+  "message": "Hello, I wanted to ask about my child's math homework for this week. Could you please provide more details?",
+  "messageType": "Academic",
+  "priority": "Medium",
+  "school": "688f96c5b11ea1d897070699"
+}
+
+### Send Message to Admin
+POST {{baseUrl}}/parents/68923831d45d5ed619ccee5a/messages/send
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "recipient": "688f96c5b11ea1d897070699",
+  "recipientModel": "admin",
+  "student": "688fa6ab73e78ad9a1309f68",
+  "subject": "Fee Payment Query",
+  "message": "I have a question regarding the upcoming fee payment. Could you please clarify the due date?",
+  "messageType": "Administrative",
+  "priority": "High",
+  "school": "688f96c5b11ea1d897070699"
+}
+
+### Get All Parent Messages
+GET {{baseUrl}}/parents/68923831d45d5ed619ccee5a/messages
+Authorization: Bearer {{token}}
+
+### Get Unread Messages
+GET {{baseUrl}}/parents/68923831d45d5ed619ccee5a/messages?unread=true
+Authorization: Bearer {{token}}
+
+### Get Messages by Type
+GET {{baseUrl}}/parents/68923831d45d5ed619ccee5a/messages?type=Academic
+Authorization: Bearer {{token}}
+
+### Get Messages with Pagination
+GET {{baseUrl}}/parents/68923831d45d5ed619ccee5a/messages?page=1&limit=5
+Authorization: Bearer {{token}}
+
+### Mark Message as Read
+PUT {{baseUrl}}/parents/messages/68923831d45d5ed619ccee5a/read
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "parentId": "68923831d45d5ed619ccee5a"
+}
+
+# ========== SCHOOL INFORMATION ==========
+
+### Get All School Events
+GET {{baseUrl}}/parents/events?school=688f96c5b11ea1d897070699
+Authorization: Bearer {{token}}
+
+### Get Upcoming School Events
+GET {{baseUrl}}/parents/events?school=688f96c5b11ea1d897070699&upcoming=true
+Authorization: Bearer {{token}}
+
+### Get Events by Type
+GET {{baseUrl}}/parents/events?school=688f96c5b11ea1d897070699&eventType=Academic
+Authorization: Bearer {{token}}
+
+### Get Events with Pagination
+GET {{baseUrl}}/parents/events?school=688f96c5b11ea1d897070699&page=1&limit=5
+Authorization: Bearer {{token}}
+
+### Get All School Notices
+GET {{baseUrl}}/parents/notices?school=688f96c5b11ea1d897070699
+Authorization: Bearer {{token}}
+
+### Get Notices with Pagination
+GET {{baseUrl}}/parents/notices?school=688f96c5b11ea1d897070699&page=1&limit=10
+Authorization: Bearer {{token}}
