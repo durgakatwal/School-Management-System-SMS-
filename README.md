@@ -62,7 +62,7 @@ School Management System/
 
 ⚙️ Setup Instructions
 1️⃣ Clone the repo
-git clone https://github.com/YOUR_USERNAME/school-management-system.git
+git clone (https://github.com/durgakatwal/School-Management-System-SMS-.git)
 cd school-management-system
 
 2️⃣ Setup Backend
