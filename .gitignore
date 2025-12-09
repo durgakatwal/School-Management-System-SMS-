@@ -36,3 +36,8 @@ out/
 # Optional for React Native or Expo (if any)
 .expo/
 .expo-shared/
+
+
+Backend/.env
+Backend/node_modules/
+Backend/.vscode/
